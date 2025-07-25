@@ -1,4 +1,4 @@
-/* Simple Carousel Block - Cards-Style Implementation */
+/* Simple Carousel Block - Cards-Style 2-Column Implementation */
 
 .carousel {
   position: relative;
@@ -28,31 +28,44 @@
   flex: 0 0 100%;
   position: relative;
   display: flex;
-  flex-direction: column;
   background: var(--background-color);
+  border: 1px solid #dadada;
 }
 
-/* Slide content styling - like cards block */
+/* 2-Column slide layout - like cards block */
 .carousel .carousel-slide-image {
+  flex: 0 0 50%;
   line-height: 0;
-  flex-shrink: 0;
+  overflow: hidden;
 }
 
 .carousel .carousel-slide-image img {
   width: 100%;
-  height: 300px;
+  height: 100%;
   object-fit: cover;
   display: block;
 }
 
 .carousel .carousel-slide-body {
+  flex: 1;
   padding: 20px;
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: var(--background-color);
 }
 
+/* Full width variants for single-column content */
+.carousel .carousel-slide-image.full-width {
+  flex: 1;
+}
+
+.carousel .carousel-slide-body.full-width {
+  flex: 1;
+  text-align: center;
+}
+
+/* Content styling - like cards block */
 .carousel .carousel-slide-body h1,
 .carousel .carousel-slide-body h2,
 .carousel .carousel-slide-body h3,
@@ -62,6 +75,7 @@
   margin: 0 0 12px 0;
   color: #202020;
   font-weight: bold;
+  font-size: 1.5rem;
 }
 
 .carousel .carousel-slide-body p {
@@ -154,11 +168,20 @@
   outline-offset: 2px;
 }
 
-/* Mobile responsive */
+/* Mobile responsive - stack columns */
 @media (max-width: 768px) {
   .carousel .carousel-container {
     height: auto;
-    min-height: 350px;
+    min-height: 400px;
+  }
+
+  /* Stack image above content on mobile */
+  .carousel .carousel-slide {
+    flex-direction: column;
+  }
+
+  .carousel .carousel-slide-image {
+    flex: 0 0 250px;
   }
 
   .carousel .carousel-slide-image img {
@@ -166,6 +189,7 @@
   }
 
   .carousel .carousel-slide-body {
+    flex: 1;
     padding: 16px;
   }
 
@@ -191,8 +215,12 @@
 
 @media (max-width: 480px) {
   .carousel .carousel-container {
-    min-height: 300px;
+    min-height: 350px;
     border-radius: 4px;
+  }
+
+  .carousel .carousel-slide-image {
+    flex: 0 0 200px;
   }
 
   .carousel .carousel-slide-image img {
@@ -201,6 +229,12 @@
 
   .carousel .carousel-slide-body {
     padding: 12px;
+  }
+
+  .carousel .carousel-slide-body h1,
+  .carousel .carousel-slide-body h2,
+  .carousel .carousel-slide-body h3 {
+    font-size: 1.2rem;
   }
 
   .carousel .carousel-nav {
@@ -234,5 +268,9 @@
 
   .carousel .carousel-dot.active {
     background: black;
+  }
+
+  .carousel .carousel-slide {
+    border: 2px solid black;
   }
 }

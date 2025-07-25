@@ -1,37 +1,71 @@
 /**
- * Simple Carousel Block - Cards-Style Implementation
- * Each row becomes a slide, no configuration needed
+ * Simple Carousel Block - Cards-Style 2-Column Implementation
+ * Each row becomes a slide: [Image] | [Content]
  */
 
 import { createOptimizedPicture } from '../../scripts/aem.js';
 
 export default function decorate(block) {
-  // Simple slide creation - each row becomes a slide
+  // Simple slide creation - each row becomes a slide (like cards block)
   const wrapper = document.createElement('div');
   wrapper.className = 'carousel-wrapper';
   
   const slides = [];
   
-  // Convert each row to a slide (like cards block)
+  // Convert each row to a slide (exactly like cards block)
   [...block.children].forEach((row, index) => {
     const slide = document.createElement('div');
     slide.className = 'carousel-slide';
     slide.setAttribute('id', `slide-${index}`);
     slide.setAttribute('aria-label', `Slide ${index + 1}`);
     
-    // Move content from row to slide
-    while (row.firstElementChild) {
-      slide.append(row.firstElementChild);
-    }
+    // Handle 2-column rows like cards block
+    const cells = [...row.children];
     
-    // Categorize content like cards block
-    [...slide.children].forEach((div) => {
-      if (div.children.length === 1 && div.querySelector('picture')) {
-        div.className = 'carousel-slide-image';
-      } else {
-        div.className = 'carousel-slide-body';
+    if (cells.length >= 2) {
+      // 2-column layout: [Image] | [Content]
+      const imageCell = cells[0];
+      const contentCell = cells[1];
+      
+      // Create image container
+      const imageContainer = document.createElement('div');
+      imageContainer.className = 'carousel-slide-image';
+      while (imageCell.firstElementChild) {
+        imageContainer.append(imageCell.firstElementChild);
       }
-    });
+      
+      // Create content container  
+      const contentContainer = document.createElement('div');
+      contentContainer.className = 'carousel-slide-body';
+      while (contentCell.firstElementChild) {
+        contentContainer.append(contentCell.firstElementChild);
+      }
+      
+      slide.append(imageContainer, contentContainer);
+      
+    } else if (cells.length === 1) {
+      // Single column - determine if image or content
+      const cell = cells[0];
+      const hasImage = cell.querySelector('picture, img');
+      
+      if (hasImage) {
+        // Image-only slide
+        const imageContainer = document.createElement('div');
+        imageContainer.className = 'carousel-slide-image full-width';
+        while (cell.firstElementChild) {
+          imageContainer.append(cell.firstElementChild);
+        }
+        slide.append(imageContainer);
+      } else {
+        // Text-only slide
+        const contentContainer = document.createElement('div');
+        contentContainer.className = 'carousel-slide-body full-width';
+        while (cell.firstElementChild) {
+          contentContainer.append(cell.firstElementChild);
+        }
+        slide.append(contentContainer);
+      }
+    }
     
     slides.push(slide);
     wrapper.append(slide);
