@@ -11,7 +11,7 @@
 .carousel .carousel-container {
   position: relative;
   width: 100%;
-  height: 500px;
+  height: 600px; /* Optimized for 4:3 aspect ratio images */
   overflow: hidden;
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
@@ -46,6 +46,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
 }
 
@@ -61,8 +62,8 @@
   padding: 40px;
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  min-width: 300px;
+  max-width: 420px;
+  min-width: 320px;
 }
 
 /* Full width variants for single-column content */
@@ -201,9 +202,9 @@
 }
 
 /* Mobile responsive */
-@media (max-width: 768px) {
+@media (max-width: 968px) {
   .carousel .carousel-container {
-    height: 450px;
+    height: 500px;
   }
 
   /* Reposition content overlay for mobile */
@@ -246,6 +247,12 @@
   .carousel .carousel-dot {
     width: 10px;
     height: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel .carousel-container {
+    height: 450px;
   }
 }
 
