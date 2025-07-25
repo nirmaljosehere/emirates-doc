@@ -5,7 +5,7 @@
 
 .hero {
   position: relative;
-  min-height: 500px;
+  min-height: 480px; /* Desktop height */
   display: flex;
   align-items: flex-end; /* Align content to bottom */
   padding: 0;
@@ -93,10 +93,10 @@
   pointer-events: none;
 }
 
-/* Mobile responsive */
-@media (max-width: 768px) {
+/* Mobile responsive - below 968px */
+@media (max-width: 968px) {
   .hero {
-    min-height: 400px;
+    min-height: 380px; /* Height for screens below 968px */
   }
 
   .hero h1 {
@@ -121,7 +121,7 @@
 
 @media (max-width: 480px) {
   .hero {
-    min-height: 350px;
+    min-height: 320px; /* Even smaller for very small screens */
   }
 
   .hero h1 {
@@ -141,30 +141,5 @@
 
   .hero > div p {
     font-size: 1rem;
-  }
-}
-
-@media (width >= 900px) {
-  .hero {
-    min-height: 600px;
-  }
-
-  .hero h1 {
-    font-size: 3.5rem;
-    margin-bottom: 80px;
-    padding: 0 60px;
-  }
-
-  .hero > div {
-    margin-bottom: 80px;
-    padding: 0 60px;
-  }
-
-  .hero > div h1 {
-    font-size: 3.5rem;
-  }
-
-  .hero > div p {
-    font-size: 1.3rem;
   }
 }
