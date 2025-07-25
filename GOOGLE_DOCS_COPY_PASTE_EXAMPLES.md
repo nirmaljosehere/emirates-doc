@@ -4,39 +4,40 @@ Copy these examples directly into Google Docs tables to test your Teaser and Car
 
 ---
 
-## 🎯 TEASER EXAMPLES
+## 🎯 TEASER EXAMPLES - 2-COLUMN LAYOUT (Like Cards!)
 
-### Example 1: Basic Teaser (Image Left)
-Create a table in Google Docs and paste this content:
+### Example 1: Basic Teaser (Image | Content)
+Create a **2-column table** like the cards block:
 
-```
-teaser
-image-left
-Discover Emirates Business Class
-Experience luxury redefined at 40,000 feet with our award-winning Business Class service.
-Book Now → https://emirates.com/business
-```
+| Column 1 (Image) | Column 2 (Content) |
+|------------------|-------------------|
+| teaser | image-left |
+| [Business Class Image] | **Discover Emirates Business Class**<br/>Experience luxury redefined at 40,000 feet with our award-winning Business Class service.<br/>[Book Now →](https://emirates.com/business) |
 
 **How to use:**
-1. Create a 1-column table with 5 rows
-2. Paste each line above into a separate row
-3. Add an image in any row
+1. Create a **2-column table with 2 rows**
+2. First row: "teaser" in first column, "image-left" in second column
+3. Second row: Image in first column, content in second column
 
 ---
 
-### Example 2: Content Left Teaser
-```
-teaser
-content-left
-Explore Dubai
-From stunning skyscrapers to golden beaches, Dubai offers unforgettable experiences for every traveler.
-Discover Dubai → https://emirates.com/destinations/dubai
-```
+### Example 2: Content Left Teaser (Content | Image)
+**Perfect 2-column structure:**
 
-**How to use:**
-1. Create a 1-column table with 5 rows
-2. Paste each line above into a separate row  
-3. Add an image in any row
+| Column 1 (Content) | Column 2 (Image) |
+|-------------------|------------------|
+| teaser | content-left |
+| **Explore Dubai**<br/>From stunning skyscrapers to golden beaches, Dubai offers unforgettable experiences for every traveler.<br/>[Discover Dubai →](https://emirates.com/destinations/dubai) | [Dubai Skyline Image] |
+
+---
+
+### Example 3: Simple Layout Definition
+You can also define layout in a single row:
+
+| Column 1 | Column 2 |
+|----------|----------|
+| content-left |  |
+| [A380 Image] | **The Emirates A380 Experience**<br/>Step aboard the world's largest passenger aircraft and discover spacious cabins, premium amenities, and our legendary service. |
 
 ---
 
@@ -83,16 +84,13 @@ Create a **2-column table** like the cards block:
 
 ## 🚀 QUICK START TEMPLATES
 
-### Ready-to-Use Teaser Template
-Copy this into a Google Docs table:
+### Ready-to-Use Teaser Template (2-Column)
+Create a **2-column table** and use this structure:
 
-```
-teaser
-image-left
-[REPLACE: Your Heading Here]
-[REPLACE: Your description text here - make it engaging and informative]
-[REPLACE: Your CTA Text] → [REPLACE: Your URL]
-```
+| Column 1 | Column 2 |
+|----------|----------|
+| teaser | image-left |
+| [Your Image] | [Your Title] - [Your Description] |
 
 ### Ready-to-Use Carousel Template (2-Column)
 Create a **2-column table** and use this structure:
@@ -108,13 +106,13 @@ Create a **2-column table** and use this structure:
 
 ## 📝 STEP-BY-STEP INSTRUCTIONS
 
-### For Teaser:
-1. **Insert Table**: Insert → Table → 1x5 table
-2. **Paste Content**: Copy any teaser example above
-3. **Add Image**: Place cursor in any cell, Insert → Image
-4. **Customize**: Replace placeholder text with your content
+### For Teaser (NEW 2-Column Approach):
+1. **Insert Table**: Insert → Table → **2x2 table** (2 columns, 2 rows)
+2. **First row**: "teaser" and layout ("image-left" or "content-left")
+3. **Second row**: Add image in one column, content in the other
+4. **Perfect!** Now it works exactly like the cards block!
 
-### For Carousel (NEW 2-Column Approach):
+### For Carousel (2-Column Approach):
 1. **Insert Table**: Insert → Table → **2x4 table** (2 columns, 4 rows)
 2. **First row**: Type "carousel" in first column, leave second empty
 3. **Remaining rows**: Add image in first column, content in second column
@@ -124,13 +122,14 @@ Create a **2-column table** and use this structure:
 
 ## 💡 SIMPLE RULES
 
-### Teaser Rules:
-- First row must be "teaser"
-- Add "image-left" or "content-left" for layout
-- Add images anywhere - first one found becomes the teaser image
-- Use action words for CTAs: "Discover", "Explore", "Book Now"
+### Teaser Rules (Updated):
+- **Use 2-column table** (like cards block!)
+- First row: "teaser" and layout direction ("image-left" or "content-left")
+- **Second row = [Image] | [Content]** or **[Content] | [Image]**
+- All content goes in the content column
+- **No configuration complexity**
 
-### Carousel Rules (Updated):
+### Carousel Rules:
 - **Use 2-column table** (like cards block!)
 - First row: "carousel" in first column only
 - **Each row = 1 slide with [Image] | [Content]**
@@ -153,14 +152,11 @@ After pasting content:
 
 ## 📱 MOBILE-OPTIMIZED EXAMPLES
 
-### Mobile-Friendly Teaser
-```
-teaser
-content-left
-Short Punchy Headline
-Brief, mobile-friendly description that's easy to read on small screens.
-Act Now → https://emirates.com
-```
+### Mobile-Friendly Teaser (2-Column)
+| Image | Content |
+|-------|---------|
+| teaser | content-left |
+| **Short Punchy Headline**<br/>Brief, mobile-friendly description that's easy to read on small screens.<br/>[Act Now →](https://emirates.com) | [Hero Image] |
 
 ### Mobile-Friendly Carousel (2-Column)
 | Image | Content |
@@ -172,36 +168,40 @@ Act Now → https://emirates.com
 
 ---
 
-## ✨ **NEW 2-COLUMN CAROUSEL - JUST LIKE CARDS!**
+## ✨ **BOTH BLOCKS NOW USE 2-COLUMN APPROACH!**
 
-### **Perfect Cards-Style Structure:**
+### **Perfect Cards-Style Structure for Both:**
 ```
-| Image Column      | Content Column                    |
-|-------------------|-----------------------------------|
-| carousel          |                                   |
-| [Your Image 1]    | Your Title 1 - Your Description 1|
-| [Your Image 2]    | Your Title 2 - Your Description 2|
-| [Your Image 3]    | Your Title 3 - Your Description 3|
+| Image/Content Column | Content/Image Column |
+|---------------------|---------------------|
+| teaser/carousel     | layout (optional)   |
+| [Your Image]        | Your Content        |
 ```
 
 ### **What You Get:**
-- ✅ **2-column layout** like cards block
-- ✅ **Image on left, content on right**
-- ✅ **Each row = 1 slide**
-- ✅ **Carousel navigation** (arrows, dots, touch/swipe)
-- ✅ **Mobile responsive** (stacks vertically)
+- ✅ **Consistent 2-column layout** for both teaser and carousel
+- ✅ **Image optimization** with createOptimizedPicture
+- ✅ **Clean content handling** - all content in content column
+- ✅ **Layout flexibility** - image-left or content-left
+- ✅ **Mobile responsive** design
 - ✅ **No configuration complexity**
 
-### **Example Table to Copy:**
+### **Example Tables to Copy:**
 
+**Teaser:**
+| Image | Content |
+|-------|---------|
+| teaser | image-left |
+| [Your Image] | **Your Headline** - Your description with links |
+
+**Carousel:**
 | Image | Content |
 |-------|---------|
 | carousel |  |
-| [Business Class Photo] | **Emirates Business Class** - Experience luxury at 40,000 feet |
-| [A380 Photo] | **Airbus A380** - World's largest passenger aircraft |
-| [Dubai Photo] | **Dubai Hub** - Your gateway to the world |
+| [Slide 1 Image] | **Slide 1 Title** - Slide 1 description |
+| [Slide 2 Image] | **Slide 2 Title** - Slide 2 description |
 
-**This is perfect!** Now your carousel works exactly like the cards block but with navigation! 🎠✨
+**Perfect!** Both blocks now work consistently with the same clean 2-column approach! 🎯✨
 
 ---
 
