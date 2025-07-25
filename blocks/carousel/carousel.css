@@ -1,0 +1,429 @@
+/* Carousel Block - Emirates Styling */
+.carousel {
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Emirates Carousel Theme */
+.carousel.emirates-carousel {
+  background: var(--background-color);
+  padding-top: 30px;
+}
+
+.carousel.emirates-carousel .carousel-title {
+  font-family: emirates-bold, Arial, sans-serif;
+  font-size: 2.5rem;
+  color: #dc143c;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: bold;
+}
+
+.carousel.emirates-carousel .carousel-container {
+  border-radius: 12px;
+  height: 900px;
+  overflow: hidden;
+}
+
+/* Emirates carousel mobile adjustments */
+@media (max-width: 967px) {
+  .carousel.emirates-carousel .carousel-container {
+    height: auto;
+    min-height: 450px;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel.emirates-carousel .carousel-container {
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel.emirates-carousel .carousel-container {
+    min-height: 350px;
+  }
+}
+
+.carousel .carousel-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.carousel .carousel-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+  touch-action: pan-y;
+}
+
+/* Mobile wrapper adjustments */
+@media (max-width: 967px) {
+  .carousel .carousel-wrapper {
+    height: auto;
+    min-height: 100%;
+  }
+}
+
+.carousel .carousel-slide {
+  flex: 0 0 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background-color);
+  overflow: hidden;
+}
+
+.carousel .carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Emirates Slide Styling */
+.carousel .emirates-slide {
+  background: linear-gradient(135deg, #1a237e, #3949ab);
+  color: white;
+}
+
+.carousel .emirates-slide.image-slide {
+  background: none;
+}
+
+.carousel .emirates-slide .slide-content {
+  position: absolute;
+  right: 0;
+  background: white;
+  color: black;
+  padding: 30px;
+}
+
+/* Default slide content positioning */
+.carousel .emirates-slide .slide-content {
+  position: absolute;
+  right: auto;
+  left: 10%;
+  max-width: 30%;
+  text-align: left;
+}
+
+.carousel .emirates-slide .slide-content h1,
+.carousel .emirates-slide .slide-content h2,
+.carousel .emirates-slide .slide-content h3,
+.carousel .emirates-slide .slide-content h4,
+.carousel .emirates-slide .slide-content h5,
+.carousel .emirates-slide .slide-content h6 {
+  text-align: left;
+}
+
+.carousel .emirates-slide.text-slide .slide-content {
+  position: static;
+  background: none;
+  padding: 2rem;
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.carousel .carousel-slide .slide-content h2 {
+  margin: 0 0 10px;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.carousel .carousel-slide .slide-content p {
+  font-size: 14px;
+}
+
+/* Navigation Arrows */
+.carousel .carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: all 0.3s ease;
+  font-size: 18px;
+  color: var(--text-color);
+}
+
+.carousel .carousel-nav:hover {
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel .carousel-nav:focus {
+  outline: 2px solid var(--link-color);
+  outline-offset: 2px;
+}
+
+.carousel .carousel-nav.prev {
+  left: 15px;
+}
+
+.carousel .carousel-nav.next {
+  right: 15px;
+}
+
+/* Dots/Indicators */
+.carousel .carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: -3%;
+}
+
+.carousel .carousel-dot {
+  background: #ddd;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 6px;
+}
+
+.carousel .carousel-dot:hover {
+  background: #bbb;
+  transform: scale(1.2);
+}
+
+.carousel .carousel-dot.active {
+  background: var(--link-color);
+  transform: scale(1.2);
+}
+
+.carousel .carousel-dot:focus {
+  outline: 2px solid var(--link-color);
+  outline-offset: 2px;
+}
+
+/* Auto-play controls */
+.carousel .carousel-controls {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.carousel .carousel-play-pause {
+  background: transparent;
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.carousel .carousel-play-pause:hover {
+  background: var(--link-color);
+  border-color: var(--link-color);
+  color: white;
+}
+
+/* Touch and gesture support */
+.carousel .carousel-wrapper.grabbing {
+  cursor: grabbing;
+}
+
+.carousel .carousel-wrapper.no-transition {
+  transition: none;
+}
+
+/* Mobile responsive layout - stack content below image */
+@media (max-width: 967px) {
+  .carousel .carousel-container {
+    height: auto; /* Allow dynamic height for stacked content */
+    min-height: 400px;
+  }
+
+  /* Mobile slide layout - stack content below image */
+  .carousel .emirates-slide.image-slide {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .carousel .emirates-slide.image-slide img {
+    width: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  /* Reposition slide content below image */
+  .carousel .emirates-slide .slide-content.overlay {
+    position: static !important; /* Override absolute positioning */
+    background: white;
+    color: var(--text-color);
+    padding: 20px;
+    margin: 0;
+    max-width: 100%;
+    transform: none;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    top: auto;
+    border-top: 1px solid #eee; /* Subtle separation from image */
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1); /* Slight elevation effect */
+  }
+
+  /* Mobile slide content styling */
+  .carousel .emirates-slide .slide-content.overlay {
+    position: static !important;
+    background: white;
+    color: var(--text-color);
+    padding: 20px;
+    margin: 0;
+    max-width: 100%;
+    transform: none;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    top: auto;
+    text-align: left;
+    border-top: 1px solid #eee;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .carousel .carousel-nav {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+
+  .carousel .carousel-nav.prev {
+    left: 10px;
+  }
+
+  .carousel .carousel-nav.next {
+    right: 10px;
+  }
+
+  .carousel .carousel-slide .slide-content h2 {
+    font-size: 1.25rem;
+  }
+
+  .carousel .carousel-slide .slide-content p {
+    font-size: 0.9rem;
+  }
+
+  .carousel .carousel-dot {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* Tablet responsive (768px and below) */
+@media (max-width: 768px) {
+  .carousel .carousel-container {
+    min-height: 350px;
+  }
+
+  .carousel .emirates-slide .slide-content.overlay {
+    padding: 15px;
+    border-top: 1px solid #eee;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel .carousel-container {
+    min-height: 300px;
+    border-radius: 4px;
+  }
+
+  .carousel .carousel-nav {
+    display: none; /* Hide arrows on very small screens */
+  }
+
+  .carousel .emirates-slide .slide-content.overlay {
+    padding: 15px 10px;
+    border-top: 1px solid #eee;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .carousel .carousel-slide .slide-content h2 {
+    font-size: 1.1rem;
+  }
+
+  .carousel .carousel-slide .slide-content p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .carousel .carousel-wrapper {
+    transition: none;
+  }
+
+  .carousel .carousel-nav,
+  .carousel .carousel-dot {
+    transition: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .carousel .carousel-nav {
+    background: white;
+    border: 2px solid black;
+    color: black;
+  }
+
+  .carousel .carousel-dot {
+    border: 2px solid black;
+  }
+
+  .carousel .carousel-dot.active {
+    background: black;
+  }
+}
+
+/* Focus indicators for keyboard navigation */
+.carousel:focus-within .carousel-nav,
+.carousel:focus-within .carousel-dot {
+  opacity: 1;
+}
+
+/* Loading state */
+.carousel.loading .carousel-wrapper {
+  opacity: 0.5;
+}
+
+.carousel.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid var(--link-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 3;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
