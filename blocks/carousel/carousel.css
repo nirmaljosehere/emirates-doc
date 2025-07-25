@@ -170,20 +170,17 @@
 .carousel .carousel-dots {
   display: flex;
   justify-content: center;
-  gap: 12px;
-  margin-top: 24px;
+  gap: 8px;
+  margin-top: -3%;
   padding: 0 20px;
 }
 
 .carousel .carousel-dot {
-  background: rgba(255, 255, 255, 0.6);
   border: none;
-  border-radius: 50%;
-  width: 12px;
-  height: 12px;
+  border-radius: 100%;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 6px;
 }
 
 .carousel .carousel-dot:hover {
