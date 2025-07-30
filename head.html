@@ -7,3 +7,134 @@
 <script nonce="aem" src="/scripts/aem.js" type="module"></script>
 <script nonce="aem" src="/scripts/scripts.js" type="module"></script>
 <link rel="stylesheet" href="/styles/styles.css"/>
+
+
+
+<!--
+     Following JavaScript scriptlet is to be inserted in the <head> of HTML page which has to be enabled for Asset Insights
+     This scriptlet initializes the Pagetracker Core javascript (fetched via 'src' attributes below).
+     Also listed below are parameters available for customization; Asset Insights' client-libraries have defaults baked-in.
+
+     While the scriptlet (and Pagetracker Core javascript) can be used AS-IS without any modifications, customers already using
+     Adobe Analytics on their webpage for tracking events other than Asset Insights (e.g., page-view events) can consider
+     the scriptlet below as a reference implementation for integration.
+
+     When using DTM, the HTML fragment below can be configured to always load at 'Page Load'. It should be
+     triggered at 'Top of Page', and HTML fragment inserted as 'Sequential HTML' in 'Javascript/Third Party tags'
+     NOTE: exclude the call to 'assetAnalytics.dispatcher.init()' while inserting as 'Sequential HTML' in DTM
+           see note above the function-call below
+     NOTE: You may want to alter if/from-where pagetracker.js and AppMeasurement.js are loaded
+           If AppMeasurement is already availble (via DTM or otherwise, it is recommended to remove request to fetch
+           'appmeasurement.js' from HTML below.
+-->
+
+
+
+<script type="text/javascript" src="https://publish-p139665-e1420034.adobeaemcloud.com/etc.clientlibs/cq/analytics/clientlibs/sitecatalyst/appmeasurement.js"></script>
+<script type="text/javascript" src="https://publish-p139665-e1420034.adobeaemcloud.com/etc.clientlibs/dam/clientlibs/assetinsights/pagetracker.js"></script>
+
+<script type="text/javascript">
+    /**
+     * this attribute identifies which data-attribute should be read for identifying if the asset is a candidate
+     * for Asset Insights' tracking
+     * default is <code>trackable</code>
+     * NOTE: it is recommended to keep this value at its default.
+     *
+     * @param attrTrackable  identifies appropriate <code>data</code> attribute in the asset-embed-code
+     */
+    // assetAnalytics.attrTrackable = 'trackable';
+
+
+    /**
+     * this attribute shall determine if assets without the </code>data-trackable</code> attribute (see above)
+     * are to be considered candidates for Asset Insights' tracking.
+     * By setting this to <code>true</code> customers can ensure that all assets embedded using asset-embed-code
+     * are candidates for Asset Insights' tracking, unless they have <code>data-trackable</code> as <code>false</code>
+     * default is <code>false</code>.
+     *
+     * @param defaultTrackable  determines if assets without <code>data-trackable</code> attribute are to be tracked.
+     */
+    // assetAnalytics.defaultTrackable = false;
+
+
+    /**
+     * this attribute identifies which data-attribute contains the Asset ID in the asset-embed-code
+     * default is <code>aem-asset-id</code>
+     * NOTE: it is recommended to keep this value at its default.
+     *
+     * @param attrAssetID  identifies appropriate <code>data</code> attribute in the asset-embed-code
+     */
+    // assetAnalytics.attrAssetID = 'aem-asset-id';
+
+    /**
+     * Pagetracker Core javascript tries to minimize the tracking-calls generated for asset-load-events by
+     * aggregating multiple asset-load-events
+     * (i.e., sending a single tracking-call for multiple asset-load-events)
+     * this value specifies (in milliseconds) how much time to wait (since last asset-load-event) for
+     * subsequent asset-load-events
+     * If the web-page contains a lot of images which are 'lazily-loaded' (e.g., user-scrolling past
+     * current window boundaries) it is recommended to keep this value high so that tracking-calls
+     * resulting due to asset-load-events are minimized.
+     * While keeping this value high WILL reduce tracking-calls generated due to asset-load-events,
+     * please be aware that keeping this value high MAY affect accuracy of data since asset-load-events
+     * generated within the configured interval CAN NOT be sent to Analytics if user navigates away/closes
+     * the webpage before the interval expires.
+     * default is 2000
+     *
+     * @param assetImpressionPollInterval  specifies interval-timeout (milli seconds) to wait for asset-load-events
+     *                                     before generating an tracking-call with aggregated asset-load-events.
+     */
+    // assetAnalytics.assetImpressionPollInterval = 2000;
+
+    /**
+     * this attribute determines how many asset-load-events can be aggregated in a single tracking-call.
+     * This is important from the context of max-#-of-characters in a GET request
+     * default is 1800
+     * NOTE: it is recommended to keep this value at its default.
+     *
+     * @param attrTrackable  identifies appropriate <code>data</code> attribute in the asset-embed-code
+     */
+    // assetAnalytics.charsLimitForGET = 1800; // bytes
+
+    /**
+     * this attribute enables logging. Any 'truthy' value will enable logging
+     *
+     * @param debug  enable/disable logs
+     */
+    // assetAnalytics.debug = false;
+    /**
+     * Following is the call to initialize Pagetracker Code javascript
+     * NOTE: Please make sure that conversion-variables and success-events specified below have been initialized
+     *       in the RSID appropriately
+     * NOTE: When using a pre-defined AppMeasurement object instead of letting Pagetracker Core create its own instance
+     *       1. Please make sure that the Adobe Analytics tool is completely initailzed (i.e., the object itself isn't undefined
+     *       2. First 3 arguments (viz., RSID, Tracking Server, Visitor Namespace) to the <code>init()</code> function
+     *          will be ignored
+     * NOTE: If using DTM, the code below MUST be invoked after both <code>assetAnalytics</code> AND <code>AppMeasurement</code>
+     *       object(s) are available. A good place would be 'Customize Page Code' of Adobe Analytics Tool Settings
+     *       Make sure that the code is called 'After UI settings'
+     * WARN: Since Asset Insights has been configured to use Auto-provisioned (reserved) Mappings for AEM Assets
+     *       make sure that "Save AEM Reporting" is also enabled on Adobe Analytics UI for selected RSID.
+     *       Otherwise Asset Insights may show incorrect results and can even result in loss of data
+     */
+    assetAnalytics.dispatcher.init(
+            "demopotemea.astrazenaca",  /** RSID to send tracking-call to */
+            "demopotemea.data.adobedc.net",  /** Tracking Server to send tracking-call to */
+            "demopotemea",  /** Visitor Namespace to send tracking-call to */
+            "",
+            "",
+            "",
+            "",
+            undefined  /** [OPTIONAL] if the webpage already has an AppMeasurement object, please include the object here. If unspecified, Pagetracker Core shall create its own AppMeasurement object */
+            );
+    /*
+     * NOTE: If the webpage already has an AppMeasurement object, please use that here. Also, if doPlugins() is already being
+     *       used, add the call <code>assetAnalytics.core.updateContextData()</code> at its end.
+     */
+    assetAnalytics.dispatcher.s.usePlugins=true;
+    assetAnalytics.dispatcher.s.doPlugins=assetAnalytics.core.updateContextData;
+
+    window.addEventListener('load', assetAnalytics.core.optimizedAssetInsights, false);
+    window.addEventListener('load', assetAnalytics.dispatcher.s.t, false);
+</script>
+
