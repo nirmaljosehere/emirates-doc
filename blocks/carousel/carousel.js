@@ -71,9 +71,27 @@ export default function decorate(block) {
     wrapper.append(slide);
   });
   
-  // Optimize images like cards block
-  wrapper.querySelectorAll('picture > img').forEach((img) => {
-    img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]));
+  // Optimize images like cards block and add asset tracking
+  wrapper.querySelectorAll('picture > img').forEach((img, imgIndex) => {
+    const originalSrc = img.src;
+    const optimizedPicture = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
+    
+    // Track the asset for insights
+    if (window.trackBlockAsset) {
+      window.trackBlockAsset(img, 'carousel', imgIndex);
+    } else {
+      // Fallback: track when asset-insights.js loads
+      document.addEventListener('DOMContentLoaded', () => {
+        if (window.trackBlockAsset) {
+          const newImg = optimizedPicture.querySelector('img');
+          if (newImg) {
+            window.trackBlockAsset(newImg, 'carousel', imgIndex);
+          }
+        }
+      });
+    }
+    
+    img.closest('picture').replaceWith(optimizedPicture);
   });
   
   // Clear block and add carousel structure
@@ -141,6 +159,16 @@ export default function decorate(block) {
     slides.forEach((slide, index) => {
       slide.setAttribute('aria-hidden', index !== currentSlide);
     });
+    
+    // Track asset view when slide becomes visible
+    if (window.trackBlockAsset) {
+      const currentSlideElement = slides[currentSlide];
+      const slideImage = currentSlideElement.querySelector('img');
+      if (slideImage && !slideImage.hasAttribute('data-insights-viewed')) {
+        window.trackBlockAsset(slideImage, 'carousel-view', currentSlide);
+        slideImage.setAttribute('data-insights-viewed', 'true');
+      }
+    }
   };
   
   const nextSlide = () => {

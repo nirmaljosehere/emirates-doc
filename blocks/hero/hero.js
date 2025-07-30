@@ -67,12 +67,29 @@ export default function decorate(block) {
 
   // Create background image
   if (backgroundImage) {
+    const originalSrc = backgroundImage.src;
     const picture = createOptimizedPicture(
       backgroundImage.src, 
       backgroundImage.alt || 'Hero background', 
       false, 
       [{ width: '1920' }]
     );
+    
+    // Track the hero background image for insights
+    if (window.trackBlockAsset) {
+      window.trackBlockAsset(backgroundImage, 'hero', 0);
+    } else {
+      // Fallback: track when asset-insights.js loads
+      setTimeout(() => {
+        if (window.trackBlockAsset) {
+          const newImg = picture.querySelector('img');
+          if (newImg) {
+            window.trackBlockAsset(newImg, 'hero', 0);
+          }
+        }
+      }, 1000);
+    }
+    
     block.appendChild(picture);
   }
 
@@ -112,5 +129,23 @@ export default function decorate(block) {
     const fallbackDiv = document.createElement('div');
     fallbackDiv.innerHTML = '<h1>Add your hero headline here</h1><p>Add your hero description here</p>';
     block.appendChild(fallbackDiv);
+  }
+  
+  // Set up intersection observer for view tracking
+  if (backgroundImage && window.IntersectionObserver) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && window.trackBlockAsset) {
+          const img = entry.target.querySelector('img');
+          if (img && !img.hasAttribute('data-insights-viewed')) {
+            window.trackBlockAsset(img, 'hero-view', 0);
+            img.setAttribute('data-insights-viewed', 'true');
+            observer.unobserve(entry.target); // Stop observing once tracked
+          }
+        }
+      });
+    }, { threshold: 0.3 }); // Track when 30% visible (hero is larger)
+    
+    observer.observe(block);
   }
 }

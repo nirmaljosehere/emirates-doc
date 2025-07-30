@@ -115,7 +115,24 @@ export default function decorate(block) {
     // Optimize image like cards block
     const img = imageElement.tagName === 'IMG' ? imageElement : imageElement.querySelector('img');
     if (img) {
+      const originalSrc = img.src;
       const optimizedPicture = createOptimizedPicture(img.src, img.alt || 'Teaser image', false, [{ width: '750' }]);
+      
+      // Track the asset for insights
+      if (window.trackBlockAsset) {
+        window.trackBlockAsset(img, 'teaser', 0);
+      } else {
+        // Fallback: track when asset-insights.js loads
+        setTimeout(() => {
+          if (window.trackBlockAsset) {
+            const newImg = optimizedPicture.querySelector('img');
+            if (newImg) {
+              window.trackBlockAsset(newImg, 'teaser', 0);
+            }
+          }
+        }, 1000);
+      }
+      
       imageContainer.appendChild(optimizedPicture);
     }
   } else {
@@ -169,4 +186,22 @@ export default function decorate(block) {
   // Add data attributes for debugging
   block.setAttribute('data-layout', layoutConfig);
   block.setAttribute('data-has-image', imageElement ? 'true' : 'false');
+  
+  // Set up intersection observer for view tracking
+  if (imageElement && window.IntersectionObserver) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && window.trackBlockAsset) {
+          const img = entry.target.querySelector('img');
+          if (img && !img.hasAttribute('data-insights-viewed')) {
+            window.trackBlockAsset(img, 'teaser-view', 0);
+            img.setAttribute('data-insights-viewed', 'true');
+            observer.unobserve(entry.target); // Stop observing once tracked
+          }
+        }
+      });
+    }, { threshold: 0.5 }); // Track when 50% visible
+    
+    observer.observe(imageContainer);
+  }
 }
